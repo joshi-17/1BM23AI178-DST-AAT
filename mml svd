@@ -1,0 +1,19 @@
+import cv2
+import numpy as np
+from google.colab.patches import cv2_imshow
+image_path = "/final pakka.jpg"  
+gray_image = cv2.imread(image_path,0)
+print("Displaying the Grayscale Image:")
+cv2_imshow(gray_image)  # For Colab use
+print("\nGrayscale Image Matrix:")
+print(gray_image)
+U, S, Vt = np.linalg.svd(gray_image, full_matrices=False)
+k=int(input("enter value for compression"))
+U=U[:,:k]
+S_matrix = np.diag(S[:k])
+vt=Vt[:k,:]
+reconstructed_image = np.dot(U, np.dot(S_matrix, vt))
+print("\nDisplaying the Reconstructed Image:")
+cv2_imshow(reconstructed_image)
+print("\nRegenerated Image Matrix:")
+print(reconstructed_image)
