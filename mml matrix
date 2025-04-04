@@ -1,0 +1,12 @@
+import sympy as sp
+import math
+x0, x1, x2, x3 = sp.symbols('x0 x1 x2 x3')
+f = sp.Matrix([
+    [sp.sin(x0 + 2*x1), 2*x1 + x3],
+    [2*x0 + x2, sp.cos(2*x2 + x3)]
+])
+x = sp.Matrix([x0, x1, x2, x3])
+J_flat=f.reshape(4,1).jacobian(x.reshape(4,1))
+J=sp.ImmutableDenseNDimArray(J_flat).reshape(2,2,2,2)
+print("The gradient of matrix is")
+display(J)
